@@ -1,0 +1,23 @@
+{
+    "name": "advanced-timer",
+    "version": "1.0.4",
+    "description": "Advanced timer with pause/resume/reset capabilites, conditional cycle execution, live timer delay manipullation, and much more.",
+    "main": "./src/advanced-timer.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/colxi/advanced-timer.git"
+    },
+    "keywords": [
+        "timer",
+        "timer pause"
+    ],
+    "author": "colxi",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/colxi/advanced-timer/issues"
+    },
+    "homepage": "https://github.com/colxi/advanced-timer#readme"
+}

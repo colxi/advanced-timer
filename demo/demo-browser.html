@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../src/advanced-timer.js"></script>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Status</td>
+            <td><span id="t_status"></span> (<span id="t_statusName"></span>)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Current Cycle</td>
+            <td><span id="t_cycle"></span></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Timer Timestamp</td>
+            <td><span id="t_timestamp"></span></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Cycle Timestamp</td>
+            <td><span id="t_cycleTimestamp"></span></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Cycle Deltatime</td>
+            <td><span id="t_real_delay"></span></td>
+            <td><span id="t_delay_diff"></td>
+        </tr>
+        <tr>
+            <td>Timer Delay</td>
+            <td><span id="t_theorical_delay"></span></td>
+            <td><input type="range" value="1000" min="1" max="5000" step="1" onchange="delay()"></td>
+        </tr>
+        <tr>
+            <td>Cycles Limit</td>
+            <td><span id="t_cycles"></span></td>
+            <td><input type="range" value="0" min="0" max="100" step="1" onchange="repeat()"></td>
+        </tr>
+    </table>
+
+    <input type="button" value="Start" onclick="start()">
+    <input type="button" value="Stop" onclick="stop()">
+    <input type="button" value="Pause" onclick="pause()">
+    <input type="button" value="Resume" onclick="resume()">
+    <input type="button" value="Reset" onclick="reset()">
+
+
+</body>
+<script type="text/javascript">
+
+let status = document.getElementById("t_status");
+let statusName = document.getElementById("t_statusName");
+let cycle = document.getElementById("t_cycle");
+let cycles = document.getElementById("t_cycles");
+let tdelay = document.getElementById("t_theorical_delay");
+let rdelay = document.getElementById("t_real_delay");
+let cycleTimestamp = document.getElementById("t_cycleTimestamp");
+let timestamp = document.getElementById("t_timestamp");
+let delayDiff = document.getElementById("t_delay_diff");
+
+function update(t=timer){
+    let b=0
+    for(let i=0;i<2000000;i++) b=b+Math.random()
+
+    status.innerHTML= t.statusCode;
+    statusName.innerHTML= t.status;
+    cycle.innerHTML = t.currentCycle;
+    cycles.innerHTML = t.cycleLimit;
+    tdelay.innerHTML = t.timerDelay;
+    rdelay.innerHTML = t.cycleDeltatime;
+    cycleTimestamp.innerHTML = t.cycleTimestamp;
+
+    let diff = t.timerDelay -  t.cycleDeltatime;
+    delayDiff.innerHTML = (diff>=0) ? '+'+diff : diff;
+    delayDiff.style.color = (diff>=0) ? 'green' : 'red';
+    if( diff<-20 ){
+        //t.delay(t.timerDelay+10)
+    }
+
+}
+
+let timer = new Timer(1000).action( update ).repeat().done( update );
+
+animate()
+
+function animate(){
+    timestamp.innerHTML= timer.timestamp
+    window.requestAnimationFrame(animate);
+}
+
+function repeat(){
+    let v = Number(event.target.value)
+    if(v===0) v=true;
+    timer.repeat(v);
+    update()
+}
+
+function delay(){
+    let v = Number(event.target.value)
+    if(v===0) v=true;
+    timer.delay(v);
+    update()
+}
+
+function start(){
+    timer.start();
+    update()
+}
+
+function stop(){
+    timer.stop();
+    update()
+}
+
+
+function reset(){
+    timer.reset();
+    update()
+}
+
+function pause(){
+    timer.pause();
+    update()
+}
+
+function resume(){
+    timer.resume();+
+    update()
+}
+
+update();
+    </script>
+</html>
