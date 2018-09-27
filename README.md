@@ -21,7 +21,7 @@ Some features:
 - Cycle timestamp, deltaTime...
 - **Tiny and Zero dependencies**
 
-
+See it in action [here](https://colxi.github.io/advanced-timer/demo/demo-browser.html).
 ## Usage example
 
 Create a timer that executes 50 times the callback every 1000ms (only when timer cycle remains in sync), and execute an onComplete callback when done.
@@ -57,7 +57,6 @@ https://github.com/colxi/advanced-timer
 
 > In browser enviromt, the Timer Object is created in the window scope (`window.Timer`), in Node enviroments, must be imported and assigned using `require()`
 
-## Limitations
 
 ## Timer Constructor
 

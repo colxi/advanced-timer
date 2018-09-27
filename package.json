@@ -1,6 +1,6 @@
 {
     "name": "advanced-timer",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Advanced timer with pause/resume/reset capabilites, conditional cycle execution, live timer delay manipullation, and much more.",
     "main": "./src/advanced-timer.js",
     "scripts": {
@@ -12,7 +12,13 @@
     },
     "keywords": [
         "timer",
-        "timer pause"
+        "timer pause",
+        "scheduler",
+        "js timer",
+        "configurable timer",
+        "setInterval",
+        "setTimeout",
+        "setInterval"
     ],
     "author": "colxi",
     "license": "MIT",

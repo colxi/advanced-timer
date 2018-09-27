@@ -88,9 +88,10 @@
         };
 
         // initialize timer
-        _timer_freq_       = t;
+        _timer_inSync_      = true;
+        _timer_freq_        = t;
         _cycle_current_     = 0;
-        _cycle_limit_       = 1;
+        _cycle_limit_       = Infinity;
         _timer_statusCode_  = 0;
         _time_delta_        = 0;
         _time_ellapsed_     = 0;
@@ -317,6 +318,8 @@
                 _time_pause_        = undefined;
                 _isCorrectionCycle_ = false;
                 _timer_statusCode_  = 0;
+                _timer_inSync_      = true;
+
 
                 if( lastStatus === 1 ) return this.start(false);
 
