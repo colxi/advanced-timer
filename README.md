@@ -73,7 +73,7 @@ Creates a new timer instance.
 
 ## Timer prototype methods
 
-####Timer.prototype.action
+### Timer.prototype.action
 Sets the function to be executed in each timer cycle. **Is required to be able to start the timer.**
 ```javascript
     myTimer.action( callback );
@@ -84,7 +84,7 @@ Sets the function to be executed in each timer cycle. **Is required to be able t
 > Note: Action callback can be changed any time.
 
 
-#### Timer.prototype.start
+### Timer.prototype.start
 Starts the timer. 
 
 ```javascript
@@ -93,14 +93,14 @@ Starts the timer.
 > Only a stopped timer (status 0) can be started. If it's paused (status 2)  must be resumed, if it's completed (status 3) must be reseted first.
 
 
-#### Timer.prototype.stop
+### Timer.prototype.stop
 Stops the timer. ( Is the equivakent of `myTimer.pause().reset()` )
 
 ```javascript
    myTimer.stop();
 ```
 
-#### Timer.prototype.pause
+### Timer.prototype.pause
 Pauses the timer.
 
 ```javascript
@@ -108,7 +108,7 @@ Pauses the timer.
 ```
 > Only a running timer (status 1) can be paused.
 
-#### Timer.prototype.resume
+### Timer.prototype.resume
 Resumes the timer.
 
 ```javascript
@@ -119,7 +119,7 @@ Resumes the timer.
 > Only a paused timer (status 2) can be resumed.
 
 
-####Timer.prototype.repeat
+### Timer.prototype.repeat
 Sets the ammount of cycles before the timer stops. By default, if `repeat`is not executed, the timer will run infinitelly. 
 ```javascript
     myTimer.repeat( times );
@@ -129,7 +129,7 @@ Sets the ammount of cycles before the timer stops. By default, if `repeat`is not
 > Note: Can be changed any time.
 
 
-####Timer.prototype.delay
+### Timer.prototype.delay
 Sets the delay betwen each timer cycle
 
 ```javascript
@@ -139,7 +139,7 @@ Sets the delay betwen each timer cycle
 
 > Note: Delay time can be changed any time.
 
-####Timer.prototype.reset
+### Timer.prototype.reset
 Resets the timer and all its atributes.
 
 ```javascript
@@ -147,7 +147,7 @@ Resets the timer and all its atributes.
 ```
 
 
-####Timer.prototype.if
+### Timer.prototype.if
 Sets a callback to be executed before each cycle call. If returns true the cycle callback will be executed, but ommited if returns false.
 
 ```javascript
@@ -158,7 +158,7 @@ Sets a callback to be executed before each cycle call. If returns true the cycle
 > Note : Conditional callback can be disabled any time, by providing `false` as argument: `myTimer.if( false ) `
 
 
-####Timer.prototype.done
+### Timer.prototype.done
 Sets the callback to be executed when the timer reaches the las scheduled cycle.
 
 ```javascript
@@ -166,7 +166,7 @@ Sets the callback to be executed when the timer reaches the las scheduled cycle.
 ```
 - `callback`: Function to be executed. Function recieves the timer reference as the first argument¡
 
-####Timer.prototype.destroy
+### Timer.prototype.destroy
 Destroys the timer and all its internal properties. Timer becomes unusable, and frees memory.
 ```javascript
     myTimer.destroy();
