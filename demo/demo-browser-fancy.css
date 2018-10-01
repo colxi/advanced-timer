@@ -2,7 +2,7 @@
 * @Author: colxi
 * @Date:   2018-09-27 22:07:51
 * @Last Modified by:   colxi
-* @Last Modified time: 2018-10-01 11:14:49
+* @Last Modified time: 2018-10-01 12:32:17
 */
 
 
@@ -11,23 +11,36 @@
     --color-foreground: #008000;
 }
 
+html{  height: 100%; }
 body {
     height: 100%;
     width: 100%;
     background-color: var(--color-background);
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-size:12px;
+    position: absolute;
+    top: 0px;
 }
+
+
+#globalContainer{
+    width: 550px;
+    height: 550px;
+    margin: auto;
+    margin-top: 20px;
+    position:relative;
+}
+
 
 
 #container{
     margin: auto;
     text-align: center;
     color:var(--color-foreground);
-    margin-top: 125px;
     position: relative;
     width: 300px;
     z-index: 9999;
+    padding-top: 120px;
 }
 
 #countdown {
@@ -86,7 +99,7 @@ svg circle {
     width: 80px;
     height: 80px;
     border-radius: 100%;
-    top: 30px;
+    top: 140px;
     z-index: 999;
     border: 3px dashed var(--color-foreground);
     color:var(--color-foreground);
@@ -145,13 +158,6 @@ canvas{
     opacity:.3;
 
 }
-
-#globalContainer{
-    width: 550px;
-    height: 550px;
-    margin: auto;
-}
-
 
 
 

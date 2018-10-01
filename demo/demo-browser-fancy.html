@@ -124,12 +124,14 @@ function action(action){
 
 function update(){
     if(timer.inSync){
-        warn.innerHTML = '✔';
-        document.documentElement.style.setProperty('--color-background', black);
-        document.documentElement.style.setProperty('--color-foreground', green);
-        material.color.r = 0x00;
-        material.color.g = 0x80;
-        material.color.b = 0x00;
+        if( warn.innerHTML !== '✔'){
+            warn.innerHTML = '✔';
+            document.documentElement.style.setProperty('--color-background', black);
+            document.documentElement.style.setProperty('--color-foreground', green);
+            material.color.r = 0x00;
+            material.color.g = 0x80;
+            material.color.b = 0x00;
+        }
     }else{
         warn.innerHTML = '⚠';
         document.documentElement.style.setProperty('--color-background', red);
