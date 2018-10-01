@@ -178,7 +178,7 @@ Sets the out of sync threshold in ms. If a cycle `deltaTime` exceeds the timer f
 ```javascript
     Timer.prototype.setSyncThreshold( ms );
 ```
-- `callback`: Positive integer representing the ammountof miliseconds.
+- `ms`: Positive integer representing the ammountof miliseconds.
 
 
 ## Timer prototype properties
