@@ -2,7 +2,7 @@
 * @Author: colxi
 * @Date:   2018-09-27 22:07:51
 * @Last Modified by:   colxi
-* @Last Modified time: 2018-10-01 12:32:17
+* @Last Modified time: 2018-10-01 12:39:04
 */
 
 
@@ -11,7 +11,11 @@
     --color-foreground: #008000;
 }
 
-html{  height: 100%; }
+html{
+    height: 100%;
+    margin:0px;
+}
+
 body {
     height: 100%;
     width: 100%;
@@ -20,6 +24,7 @@ body {
     font-size:12px;
     position: absolute;
     top: 0px;
+    margin:0px;
 }
 
 
@@ -40,7 +45,7 @@ body {
     position: relative;
     width: 300px;
     z-index: 9999;
-    padding-top: 120px;
+    padding-top: 130px;
 }
 
 #countdown {
