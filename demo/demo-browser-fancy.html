@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="htt.ps://threejs.org/build/three.min.js"></script>
+
+    <script type="text/javascript" src="../src/advanced-timer.js"></script>
+    <link rel="stylesheet" href="./demo-browser-fancy.css">
+</head>
+<body>
+    <div id="globalContainer">
+        <div id="container">
+            <div id="deltaTime">
+                <span>deltaTime : </span>
+                <br>
+                <span id="deltaTimeLabel">887ms</span>
+                <br>
+            </div>
+            <div id="countdown">
+                <div id="c">
+                    <div id="currentCycle">0</div>
+                    <div id="timestamp">2234ms</div>
+                </div>
+                <svg>
+                    <circle r="70" cx="75" cy="75"></circle>
+                    <circle r="70" cx="75" cy="75" id="r"></circle>
+                </svg>
+            </div>
+            <div id="delay">
+                <br>
+                <span>frequency : </span>
+                <span id="delayLabel">887ms</span>
+            </div>
+            <input id="changeDelay" type="range" value="390" min="1" max="800" step="1" onchange="setDelay()">
+            <div id="nosync">
+                <div id="warn">⚠</div>
+                <div>SYNC</div>
+            </div>
+            <div>
+                <span class="button" onclick="action('start')">►</span>
+                <span class="button" onclick="action('pause')">❚❚</span>
+                <span class="button" onclick="action('stop')">◼</span>
+                <span class="button" onclick="action('reset')">↻</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+//
+// set colors
+//
+let white = '#ffffff';
+let black = '#202020';
+let green = '#008000';
+let red   = '#9f0d0d';
+
+
+//
+// create 3d  polygon
+//
+let scene = new THREE.Scene();
+let camera = new THREE.PerspectiveCamera( 30, 1, 0.1, 1000 );
+let renderer = new THREE.WebGLRenderer({ alpha: true });
+let geometry = new THREE.IcosahedronGeometry(20, 0);
+let material = new THREE.MeshBasicMaterial( {wireframe:true, color:0x00FF00, side: THREE.BackSide} );
+let wireframe = new THREE.Mesh( geometry, material );
+
+//renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setSize( 550,550 );
+document.getElementById('globalContainer').appendChild( renderer.domElement );
+scene.add( wireframe );
+
+wireframe.rotation.x = 0.1;
+wireframe.rotation.y = -0.25;
+camera.position.z = 100;
+
+
+//
+// set timer
+//
+let timer= new Timer(390).action( tick ).start();
+timer.setSyncThreshold(20);
+
+var warn = document.getElementById('warn');
+var currentCycle = document.getElementById('currentCycle');
+var timestamp = document.getElementById('timestamp');
+var deltaTime = document.getElementById('deltaTimeLabel');
+var delay = document.getElementById('delayLabel');
+
+//
+//  start!
+//
+update();
+renderer.render(scene, camera);
+
+
+//
+// functions
+//
+function tick(){
+    wireframe.rotation.x += 0.1;
+    renderer.render(scene, camera);
+    for(let i=0;i<20000000;i++)  Math.sqrt(i);
+}
+
+function setDelay(){
+    let v = Number(event.target.value);
+    if(v===0) v=true;
+    timer.delay(v);
+    delay.innerHTML = timer.timerDelay+'ms';
+
+    tick();
+}
+
+function action(action){
+    if(action==='start') timer.status==='paused'? timer.resume(): timer.start();
+    else if(action==='pause') timer.pause();
+    else if(action==='reset') timer.reset();
+    else if(action==='stop') timer.stop();
+    update();
+}
+
+function update(){
+    if(timer.inSync){
+        warn.innerHTML = '✔';
+        document.documentElement.style.setProperty('--color-background', black);
+        document.documentElement.style.setProperty('--color-foreground', green);
+        material.color.r = 0x00;
+        material.color.g = 0x80;
+        material.color.b = 0x00;
+    }else{
+        warn.innerHTML = '⚠';
+        document.documentElement.style.setProperty('--color-background', red);
+        document.documentElement.style.setProperty('--color-foreground', white);
+        material.color.r=0xff;
+        material.color.g=0xff;
+        material.color.b=0xff;
+    }
+    timestamp.innerHTML= timer.timestamp+'ms';
+    currentCycle.innerHTML = timer.currentCycle;
+    deltaTime.innerHTML = timer.cycleDeltatime+'ms';
+    delay.innerHTML = timer.timerDelay+'ms';
+    let cycleEllapsed = timer.timestamp - timer.cycleTimestamp;
+    let rot = cycleEllapsed * 440 / timer.timerDelay;
+
+    document.getElementById('r').style.strokeDashoffset= rot+'px';
+    window.requestAnimationFrame(update);
+}
+
+
+</script>
+</html>

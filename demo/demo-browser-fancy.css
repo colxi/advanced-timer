@@ -1,0 +1,422 @@
+/*
+* @Author: colxi
+* @Date:   2018-09-27 22:07:51
+* @Last Modified by:   colxi
+* @Last Modified time: 2018-10-01 11:14:49
+*/
+
+
+:root{
+    --color-background: #202020;
+    --color-foreground: #008000;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-background);
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size:12px;
+}
+
+
+#container{
+    margin: auto;
+    text-align: center;
+    color:var(--color-foreground);
+    margin-top: 125px;
+    position: relative;
+    width: 300px;
+    z-index: 9999;
+}
+
+#countdown {
+    position: relative;
+    height: 152px;
+    width: 152px;
+    margin: auto;
+}
+
+#currentCycle {
+    display: inline-block;
+    font-size: 40px;
+    margin-top:26px;
+}
+
+svg {
+    padding:0px;
+    border: 1px solid var(--color-foreground);
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+
+svg circle {
+    stroke-dasharray:440px;
+    stroke-dashoffset: 0px;
+    stroke-width: 10px;
+    stroke: var(--color-foreground);
+    fill: none;
+}
+#r {
+    stroke-dasharray:440px;
+    stroke-dashoffset: 0px;
+    stroke-width: 16px;
+    stroke: var(--color-background);
+    fill: none;
+}
+#c{
+    width: 125px;
+    height: 125px;
+    background: var(--color-background);
+    border-radius: 100%;
+    z-index: 101;
+    position: absolute;
+    margin: 13px;
+}
+#nosync{
+    position: absolute;
+    background: var(--color-background);
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    top: 30px;
+    z-index: 999;
+    border: 3px dashed var(--color-foreground);
+    color:var(--color-foreground);
+}
+#warn{
+    font-size: 35px;
+    margin-top: 2px;
+}
+
+#changeDelay{
+    width: 200px;
+ }
+
+#deltaTime{ margin-bottom: -5px; }
+
+#deltaTime:after{
+    content: "|";
+    height: 20px;
+    width:20px;
+}
+
+#delay{ margin-top: -7px; }
+#delay:before{
+    content: "|";
+    height: 20px;
+    width:20px;
+
+}
+
+#timestamp{
+    width: 80px;
+    margin: auto;
+    border-top: 1px dotted var(--color-foreground);
+    padding: 2px;
+}
+
+.button {
+    padding: 5px;
+    background: var(--color-foreground);
+    border-radius: 100%;
+    color: var(--color-background);
+    width: 20px;
+    display: inline-block;
+    height: 20px;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    cursor:pointer;
+}
+
+canvas{
+    position:absolute;
+    top:0;
+    z-index:-1;
+    opacity:.3;
+
+}
+
+#globalContainer{
+    width: 550px;
+    height: 550px;
+    margin: auto;
+}
+
+
+
+
+
+
+/** custom style forthe range input */
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 4px 0;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+    background: var(--color-foreground);
+    border-radius: 0px;
+    border: 0px solid var(--color-background);
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: var(--color-foreground);
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+    background: var(--color-foreground);
+    border-radius: 0px;
+    border: 0px solid var(--color-background);
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: var(--color-background);
+    border: 0px solid var(--color-background);
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px var(--color-background);
+}
+input[type=range]::-ms-fill-upper {
+    background: var(--color-foreground);
+    border: 0px solid  var(--color-background);
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px var(--color-background);
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+    height: 2px;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: var(--color-foreground);
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: var(--color-foreground);
+}
+
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 4px 0;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+    background: var(--color-foreground);
+    border-radius: 0px;
+    border: 0px solid var(--color-background);
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: var(--color-foreground);
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+    background: var(--color-foreground);
+    border-radius: 0px;
+    border: 0px solid var(--color-background);
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: var(--color-backround);
+    border: 0px solid var(--color-background);
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+}
+input[type=range]::-ms-fill-upper {
+    background: var(--color-foreground);
+    border: 0px solid var(--color-backround);
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+    height: 2px;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: var(--color-foreground);
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: var(--color-foreground);
+}
+
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 4px 0;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+    background: var(--color-foreground);
+    border-radius: 0px;
+    border: 0px solid var(--color-background);
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: var(--color-foreground);
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+    background: var(--color-foreground);
+    border-radius: 0px;
+    border: 0px solid  var(--color-background);
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: var(--color-background);
+    border: 0px solid var(--color-background);
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px   var(--color-background);
+}
+input[type=range]::-ms-fill-upper {
+    background:  var(--color-foreground);
+    border: 0px solid var(--color-background);
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px var(--color-background), 0px 0px 0px  var(--color-background);
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px var(--color-foreground), 0px 0px 0px var(--color-foreground);
+    border: 0px solid var(--color-foreground);
+    height: 10px;
+    width: 11px;
+    border-radius: 50px;
+    background: var(--color-foreground);
+    cursor: pointer;
+    height: 2px;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: var(--color-foreground);
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: var(--color-foreground);
+}
+
+

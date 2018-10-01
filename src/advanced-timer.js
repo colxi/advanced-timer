@@ -58,7 +58,7 @@
                 _timer_inSync_      = true;
             }else{
                 // set the inSync flag to the appropiate value
-                _timer_inSync_ = (_timer_freq_ - _time_delta_) < SYNC_TOLERANCE ? false : true;
+                _timer_inSync_ =  _time_delta_ > _timer_freq_+ SYNC_TOLERANCE ? false : true;
             }
 
             // if a cycle condtion has been set, execute it, and if evaluates to
@@ -116,7 +116,7 @@
             get cycleLimit(){ return _cycle_limit_ },
             get cycleTimestamp(){ return _time_ellapsed_ || 0 }, // time where cycle has started
             get cycleDeltatime(){ return _time_delta_ || 0 }, // delta time betwen previous and current cycle
-
+            get syncThreshold(){ return SYNC_TOLERANCE },
 
             /**
              * [action description]
@@ -175,7 +175,6 @@
             },
 
             stop: function(){
-
                 this.pause();
                 this.reset();
                 return this;
@@ -324,7 +323,18 @@
                 if( lastStatus === 1 ) return this.start(false);
 
                 return this;
+            },
+
+            /**
+             * [setSyncThreshold description]
+             * @param {[type]} x [description]
+             */
+            setSyncThreshold : function(x){
+                if( parseInt(x)!==x || x<0) throw new Error('Timer.setSyncThreshold() expects a positive integer');
+                SYNC_TOLERANCE=x;
+                return true;
             }
+
         };
 
 

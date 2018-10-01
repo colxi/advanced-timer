@@ -21,7 +21,8 @@ Some features:
 - Cycle timestamp, deltaTime...
 - **Tiny and Zero dependencies**
 
-See it in action [here](https://colxi.github.io/advanced-timer/demo/demo-browser.html).
+See it in action [here](https://colxi.github.io/advanced-timer/demo/demo-browser-fancy.html).
+
 ## Usage example
 
 Create a timer that executes 50 times the callback every 1000ms (only when timer cycle remains in sync), and execute an onComplete callback when done.
@@ -76,7 +77,7 @@ Creates a new timer instance.
 ### Timer.prototype.action
 Sets the function to be executed in each timer cycle. **Is required to be able to start the timer.**
 ```javascript
-    myTimer.action( callback );
+    Timer.prototype.action( callback );
 ```
 
 - `callback`: Function to execute in each timer cycle. The function execution context will be binded to the timer (unless if declared as arrow functon), and will recieve a reference to the timer objct as the first argument.
@@ -88,7 +89,7 @@ Sets the function to be executed in each timer cycle. **Is required to be able t
 Starts the timer. 
 
 ```javascript
-  myTimer.start();
+   Timer.prototype.start();
 ```
 > Only a stopped timer (status 0) can be started. If it's paused (status 2)  must be resumed, if it's completed (status 3) must be reseted first.
 
@@ -97,14 +98,14 @@ Starts the timer.
 Stops the timer. ( Is the equivakent of `myTimer.pause().reset()` )
 
 ```javascript
-   myTimer.stop();
+    Timer.prototype.stop();
 ```
 
 ### Timer.prototype.pause
 Pauses the timer.
 
 ```javascript
-   myTimer.pause();
+    myTimer.pause();
 ```
 > Only a running timer (status 1) can be paused.
 
@@ -112,7 +113,7 @@ Pauses the timer.
 Resumes the timer.
 
 ```javascript
-    myTimer.resume();
+    Timer.prototype.resume();
 ```
 
 
@@ -122,7 +123,7 @@ Resumes the timer.
 ### Timer.prototype.repeat
 Sets the ammount of cycles before the timer stops. By default, if `repeat`is not executed, the timer will run infinitelly. 
 ```javascript
-    myTimer.repeat( times );
+    Timer.prototype.repeat( times );
 ```
 - `times`:  Positive integer (or `Boolean`) representing the ammount of cycles to execute. If `false ` is set, a single cycle wil be executed. If set to `true`will run infinitelly.
 
@@ -133,7 +134,7 @@ Sets the ammount of cycles before the timer stops. By default, if `repeat`is not
 Sets the delay betwen each timer cycle
 
 ```javascript
-    myTimer.delay( milliseconds );
+    Timer.prototype.delay( milliseconds );
 ```
 - `milliseconds`: Integer representing ammount of milliseconds betwen each cycle callback.
 
@@ -143,7 +144,7 @@ Sets the delay betwen each timer cycle
 Resets the timer and all its atributes.
 
 ```javascript
-    myTimer.reset();
+    Timer.prototype.reset();
 ```
 
 
@@ -151,7 +152,7 @@ Resets the timer and all its atributes.
 Sets a callback to be executed before each cycle call. If returns true the cycle callback will be executed, but ommited if returns false.
 
 ```javascript
-    myTimer.if( callback );
+    Timer.prototype.if( callback );
 ```
 - `callback`: Function to be executed. Function recieves the timer reference as the first argument¡
 
@@ -162,28 +163,36 @@ Sets a callback to be executed before each cycle call. If returns true the cycle
 Sets the callback to be executed when the timer reaches the las scheduled cycle.
 
 ```javascript
-    myTimer.done( callback );
+    Timer.prototype.done( callback );
 ```
 - `callback`: Function to be executed. Function recieves the timer reference as the first argument¡
 
 ### Timer.prototype.destroy
 Destroys the timer and all its internal properties. Timer becomes unusable, and frees memory.
 ```javascript
-    myTimer.destroy();
+    Timer.prototype.destroy();
 ```
+
+### Timer.prototype.setSyncThreshold
+Sets the out of sync threshold in ms. If a cycle `deltaTime` exceeds the timer freqency (`timerDelay`) by an ammount of miliseconds higher than the set threshold, the `inSync` flag, will become false.
+```javascript
+    Timer.prototype.setSyncThreshold( ms );
+```
+- `callback`: Positive integer representing the ammountof miliseconds.
 
 
 ## Timer prototype properties
 
 - `Timer.prototype.statusCode` : Integer representing the timer status (-1,0,1,2,3)
 - `Timer.prototype.status` : String representing the status of the timer ( destroyed, stopped, running, paused, completed)
-- `Timer.prototype.inSync`: Boolean. When cycle can't be executed respecting the provided `delay` , `ìnSync` becomes `false`.
+- `Timer.prototype.inSync`: Boolean. When cycle can't be executed respecting the provided `delay + syncThreshold`, `ìnSync` becomes `false`.
 - `Timer.prototype.timerDelay`: Integer representing the timer frequency.
 - `Timer.prototype.timestamp`: Integer represemting the current timestamp.
 - `Timer.prototype.currentCycle`: Integer. Cycle counter.
 - `Timer.prototype.cycleLimit`: Integer representing the total ammount of cyles to be executed before timer stops.
 - `Timer.prototype.cycleTimestamp` : Integer representing te timestamp corresponding to the current cycle starting time, relative to the timer start.
 - `Timer.prototype.cycleDeltatime`: Integer representing the ammount of milliseconds, since the last cycle.If the cycle is `ìnSync` must match (or almost) with the provided `delay`value.
+- `Timer.prototype.syncThreshold` : Integer representing the ammount of miliseconds. (default value 20ms)
 
 
 ## Licence 
