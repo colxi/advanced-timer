@@ -2,7 +2,7 @@
 * @Author: colxi
 * @Date:   2018-09-27 22:07:51
 * @Last Modified by:   colxi
-* @Last Modified time: 2018-10-01 12:39:04
+* @Last Modified time: 2018-10-01 12:45:20
 */
 
 
@@ -104,7 +104,7 @@ svg circle {
     width: 80px;
     height: 80px;
     border-radius: 100%;
-    top: 140px;
+    top: 160px;
     z-index: 999;
     border: 3px dashed var(--color-foreground);
     color:var(--color-foreground);
