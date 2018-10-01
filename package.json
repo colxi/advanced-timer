@@ -1,6 +1,6 @@
 {
     "name": "advanced-timer",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Advanced timer with pause/resume/reset capabilites, conditional cycle execution, live timer delay manipullation, and much more.",
     "main": "./src/advanced-timer.js",
     "scripts": {
