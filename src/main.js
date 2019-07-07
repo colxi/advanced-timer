@@ -72,8 +72,8 @@
 
             // if a cycle condtion has been set, execute it, and if evaluates to
             // true execute the cycle
-            if( !_fn_condition_ || _fn_condition_.apply( timer, [ timer ] ) ){
-                _fn_callback_.apply( timer, [ timer ] );
+            if( !_fn_condition_ || _fn_condition_( timer ) ){
+                _fn_callback_( timer );
             }
             // if cycle limit ks reached, stop timer
             if( _cycle_current_ >= _cycle_limit_ ) onComplete();
@@ -93,7 +93,7 @@
             // set completed statuscode
             _timer_statusCode_ = Timer.Status.COMPLETED;
             // execte onCompkete callback if setted
-            if( _fn_onComplete_ ) _fn_onComplete_.apply( timer, [ timer ] );
+            if( _fn_onComplete_ ) _fn_onComplete_( timer );
         };
 
         // initialize timer
@@ -134,7 +134,7 @@
              */
             action : function(f){
                 if( typeof f !== 'function' ) throw new Error('Timer.action() expects a function');
-                _fn_callback_ = f;
+                _fn_callback_ = f.bind( timer );
                 return this;
             },
 
@@ -250,7 +250,7 @@
              */
             if: function(c){
                 if( !c ) _fn_condition_ = undefined;
-                else if( typeof c === 'function' ) _fn_condition_ = c;
+                else if( typeof c === 'function' ) _fn_condition_ = c.bind( timer );
                 else throw new Error('Timer.if() expects a function or false');
 
                 return this;
@@ -263,7 +263,7 @@
              */
             done: function(d){
                 if( !d ) _fn_onComplete_ = undefined;
-                else if( typeof d === 'function' ) _fn_onComplete_ = d;
+                else if( typeof d === 'function' ) _fn_onComplete_ = d.bind( timer );
                 else throw new Error('Timer.done() expects a function or false');
 
                 return this;
