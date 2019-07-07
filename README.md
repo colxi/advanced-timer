@@ -20,7 +20,7 @@ Some features:
 - Live iterations count change ( Timer.repeat() )
 - Sync lost detection ( Timer.inSync )
 - Cycle timestamp, deltaTime...
-- Node & Broser compatible (ES6 module & Node Module)
+- Node & Browser compatible (Node Module, ES6 module , Script Inlcude)
 - **Tiny and Zero dependencies**
 
 See it in action [here](https://colxi.github.io/advanced-timer/demo/demo-browser-fancy.html).
